@@ -57,3 +57,9 @@ key | optional | type | default | description
 `double_action` | True | string || The action to take when the button is double-tapped. Can be `toggle`, `brightness`, or `color`.
 `double_device` | True | string || The device to take the action on. Currently, only lights and light groups are supported.
 `double_colors` | True | string || If `double_action` is `color`, this is required. Specify a comma separated list of colors to cycle through when the button is double-tapped.
+
+## Issues/Feature Requests
+
+Feel free to log any issues or feature requests. For example, if you are getting
+your buttons into Home Assistant a different way (for example, via Zigbee2MQTT),
+I would be happy to work with you to add support for that method to this app.

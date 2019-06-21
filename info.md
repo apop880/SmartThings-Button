@@ -1,5 +1,7 @@
 ## App configuration
 
+Define the app once for every button you have, giving it a unique name each time.
+
 ```yaml
 stairs_button:
   module: stbutton
