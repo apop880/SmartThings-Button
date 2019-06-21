@@ -4,9 +4,11 @@ _An app to handle events from a SmartThings Button._
 
 ## Installation
 
+This app is best installed using [HACS](https://github.com/custom-components/hacs).
+
 Download the `stbutton` directory from inside the `apps` directory here to your
 local `apps` directory, then add the configuration to enable the `stbutton`
-module. Or, install using HACS.
+module.
 
 ## How it works
 
