@@ -4,9 +4,11 @@ _An app to handle events from a SmartThings Button._
 
 ## Installation
 
-This app is best installed using [HACS](https://github.com/custom-components/hacs).
+This app is best installed using
+[HACS](https://github.com/custom-components/hacs), so that you can easily track
+and download updates.
 
-Download the `stbutton` directory from inside the `apps` directory here to your
+Alternatively, you can download the `stbutton` directory from inside the `apps` directory here to your
 local `apps` directory, then add the configuration to enable the `stbutton`
 module.
 
@@ -30,6 +32,8 @@ of three things are possible for each button interaction:
 
 ## App configuration
 
+Define the app once for every button you have, giving it a unique name each time.
+
 ```yaml
 stairs_button:
   module: stbutton
@@ -46,8 +50,8 @@ stairs_button:
 
 key | optional | type | default | description
 -- | -- | -- | -- | --
-`module` | False | string | | The module name of the app.
-`class` | False | string | | The name of the Class.
+`module` | False | string | | `stbutton`
+`class` | False | string | | `STButton`
 `device_ieee` | True | string || The device_ieee of the button, if using ZHA.
 `button_name` | True | string || The button_name of the button, if using SmartThings integration. One of `device_ieee` or `button_name` must be present.
 `tap_action` | True | string || The action to take when the button is tapped. Can be `toggle`, `brightness`, or `color`.

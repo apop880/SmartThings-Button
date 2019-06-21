@@ -18,8 +18,8 @@ stairs_button:
 
 key | optional | type | default | description
 -- | -- | -- | -- | --
-`module` | False | string | | The module name of the app.
-`class` | False | string | | The name of the Class.
+`module` | False | string | | `stbutton`
+`class` | False | string | | `STButton`
 `device_ieee` | True | string || The device_ieee of the button, if using ZHA.
 `button_name` | True | string || The name of the button, if using SmartThings integration. One of `device_ieee` or `button_name` must be present.
 `tap_action` | True | string || The action to take when the button is tapped. Can be `toggle`, `brightness`, or `color`.
