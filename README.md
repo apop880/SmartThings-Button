@@ -1,4 +1,4 @@
-# stbutton
+# SmartThings Button
 
 _An app to handle events from a SmartThings Button._
 
