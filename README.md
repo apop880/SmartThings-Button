@@ -9,8 +9,8 @@ alt="Buy Me A Coffee" style="height: 41px !important;width: 174px
 
 _An app to handle events from a SmartThings Button._
 
-** As of version 2.0, I am only testing against AppDaemon 4.x. The app will likely continue to work with
-AppDaemon 3.x, but if you have an issue and are using AppDaemon 3.x, I will not be able to provide support. **
+**As of version 2.0, I am only testing against AppDaemon 4.x. The app will likely continue to work with
+AppDaemon 3.x, but if you have an issue and are using AppDaemon 3.x, I will not be able to provide support.**
 
 ## Installation
 
