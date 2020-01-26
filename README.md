@@ -9,6 +9,9 @@ alt="Buy Me A Coffee" style="height: 41px !important;width: 174px
 
 _An app to handle events from a SmartThings Button._
 
+** As of version 2.0, I am only testing against AppDaemon 4.x. The app will likely continue to work with
+AppDaemon 3.x, but if you have an issue and are using AppDaemon 3.x, I will not be able to provide support. **
+
 ## Installation
 
 This app is best installed using
@@ -26,16 +29,16 @@ SmartThings button that you have. See the example below for configuration for
 one button. Buttons connected via ZHA or the SmartThings Hub integration are
 supported, but configuration is slightly different in each case.
 
-The app currently only works with lights, but additional domains (switches,
-covers, media players) are on the roadmap, and feature requests are welcome. One
+The app works with lights, light groups, input_booleans, and switches.
+Feature requests are welcome. One
 of three things are possible for each button interaction:
 
-* Toggle: Toggles a light on/off.
-* Brightness: Sets the light brightness to a pre-defined level. If the light's
+* Toggle: Toggles an entity on/off. For lights, the brightness defaults to 60% and a color temperature of 2700K when turned on.
+* Brightness (Lights only): Sets the light brightness to a pre-defined level. If the light's
   brightness is over 50%, the new brightness will be 15%; otherwise the new
   brightness will be 60%. These settings are on the roadmap to be
   user-configurable.
-* Color: Cycle through a user-defined list of colors.
+* Color (Lights only): Cycle through a user-defined list of colors.
 
 ## App configuration
 
@@ -60,15 +63,15 @@ key | optional | type | default | description
 `module` | False | string | | `stbutton`
 `class` | False | string | | `STButton`
 `device_ieee` | True | string || The device_ieee of the button, if using ZHA.
-`button_name` | True | string || The button_name of the button, if using SmartThings integration. One of `device_ieee` or `button_name` must be present.
+`button_name` | True | string || The name of the button, if using SmartThings integration. One of `device_ieee` or `button_name` must be present.
 `tap_action` | True | string || The action to take when the button is tapped. Can be `toggle`, `brightness`, or `color`.
-`tap_device` | True | string || The device to take the action on. Currently, only lights and light groups are supported.
+`tap_device` | True | string || The device to take the action on. Currently, only lights, light groups, groups, switches, and input_booleans are supported.
 `tap_colors` | True | string || If `tap_action` is `color`, this is required. Specify a comma separated list of colors to cycle through when the button is tapped.
 `hold_action` | True | string || The action to take when the button is held. Can be `toggle`, `brightness`, or `color`.
-`hold_device` | True | string || The device to take the action on. Currently, only lights and light groups are supported.
+`hold_device` | True | string || The device to take the action on. Currently, only lights, light groups, groups, switches, and input_booleans are supported.
 `hold_colors` | True | string || If `hold_action` is `color`, this is required. Specify a comma separated list of colors to cycle through when the button is held.
 `double_action` | True | string || The action to take when the button is double-tapped. Can be `toggle`, `brightness`, or `color`.
-`double_device` | True | string || The device to take the action on. Currently, only lights and light groups are supported.
+`double_device` | True | string || The device to take the action on. Currently, only lights, light groups, groups, switches, and input_booleans are supported.
 `double_colors` | True | string || If `double_action` is `color`, this is required. Specify a comma separated list of colors to cycle through when the button is double-tapped.
 
 ## Issues/Feature Requests

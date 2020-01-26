@@ -17,8 +17,10 @@ import appdaemon.plugins.hass.hassapi as hass
 
 # Roadmap:
 ## Custom Brightness
-## More error handling
-## Turn on/off devices other than lights
+## More error handling:
+### version 2.0 improved entity validity checking
+## Turn on/off devices other than lights:
+### version 2.0 added switch and input_boolean
 
 class STButton(hass.Hass):
 
@@ -36,6 +38,13 @@ class STButton(hass.Hass):
 		#Error check: Can't have button_name and device_ieee defined
 		if "button_name" in self.args and "device_ieee" in self.args:
 			self.log("Error - cannot have both button_name and device_ieee")
+		#Error check: Ensure valid entity defined for all options
+		if "tap_action" in self.args and (self.entity_exists(self.args["tap_device"]) == False or self.args["tap_device"].split(".")[0] not in ["light", "switch", "input_boolean"]):
+			self.log("Error - tap_action entity doesn't exist or is not a valid domain (light, switch, or input_boolean)")
+		if "hold_action" in self.args and (self.entity_exists(self.args["hold_device"]) == False or self.args["hold_device"].split(".")[0] not in ["light", "switch", "input_boolean"]):
+			self.log("Error - hold_action entity doesn't exist or is not a valid domain (light, switch, or input_boolean)")
+		if "double_action" in self.args and (self.entity_exists(self.args["double_device"]) == False or self.args["double_device"].split(".")[0] not in ["light", "switch", "input_boolean"]):
+			self.log("Error - double_action entity doesn't exist or is not a valid domain (light, switch, or input_boolean)")
 		#ST Integration: listen for button events
 		elif "button_name" in self.args:
 			self.listen_event(self.button_event, "smartthings.button", value="pushed", name=self.args["button_name"], action = "tap_action", device = "tap_device")
@@ -51,14 +60,18 @@ class STButton(hass.Hass):
 
 	def button_event(self, event_name, data, kwargs):
 		if self.args[kwargs["action"]] == "toggle":
-			light = self.get_state(self.args[kwargs["device"]])
-			if light == "off":
-				self.turn_on(self.args[kwargs["device"]], brightness_pct=60, kelvin=2700)
-				self.tap_index = 0
-				self.hold_index = 0
-				self.double_index = 0
-			else:
-				self.turn_off(self.args[kwargs["device"]])
+			if self.args[kwargs["device"]].split(".")[0] in ["switch", "input_boolean"]:
+				#toggle only
+				self.toggle(self.args[kwargs["device"]])
+			elif self.args[kwargs["device"]].split(".")[0] == "light":
+				light = self.get_state(self.args[kwargs["device"]])
+				if light == "off":
+					self.turn_on(self.args[kwargs["device"]], brightness_pct=60, kelvin=2700)
+					self.tap_index = 0
+					self.hold_index = 0
+					self.double_index = 0
+				else:
+					self.turn_off(self.args[kwargs["device"]])
 		elif self.args[kwargs["action"]] == "brightness":
 			light = self.get_state(self.args[kwargs["device"]], attribute="brightness")
 			if light != None and light < 128:
